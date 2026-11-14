@@ -1,3 +1,6 @@
+from flask import Flask
+import threading
+import os
 import sys
 import asyncio
 
@@ -71,7 +74,21 @@ async def download_tiktok(message: types.Message):
         await message.reply("⚠️ يرجى إرسال رابط تيك توك صحيح فقط.")
 
 # تشغيل البوت
+app = Flask('')
+
+@app.route('/')
+def home():
+    return "Bot is active and running 24/7!"
+
+def run():
+    port = int(os.environ.get("PORT", 8080))
+    app.run(host='0.0.0.0', port=port)
+
+def keep_alive():
+    t = threading.Thread(target=run)
+    t.start()
 if __name__ == "__main__":
     print("🚀 Starting TikTok Downloader Bot...")
     print(f"👑 Owner ID: {OWNER_ID}")
     executor.start_polling(dp, skip_updates=True)
+    keep_alive()
