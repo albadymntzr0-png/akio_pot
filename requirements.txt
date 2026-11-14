@@ -1,4 +1,2 @@
-aiogram==2.25.1
-pyrogram==2.0.106
-tgcrypto==1.2.5
-flask==3.0.3
+aiogram>=3.0.0
+flask
